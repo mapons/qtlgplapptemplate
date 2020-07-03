@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>calculator-qml.qml</file>
+        <file>CustomButton.qml</file>
+        <file>qtlegal/SoftwareLicenses/Scxml calculator.txt</file>
+    </qresource>
+</RCC>

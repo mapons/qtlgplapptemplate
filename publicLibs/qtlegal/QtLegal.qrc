@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/qtlegal">
+        <file>LicenseBrowser.qml</file>
+        <file>SoftwareLicenses/Qt_lgpl-3.0.html</file>
+        <file>SoftwareLicenses/qtlegal_lgplv3.html</file>
+    </qresource>
+</RCC>
