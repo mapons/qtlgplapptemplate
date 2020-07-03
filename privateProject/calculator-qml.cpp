@@ -67,7 +67,7 @@ int _main(int argc, char *argv[]) //rename main to _main
     QGuiApplication app(argc, argv);
 
     //set software data for legal widget
-    app.setApplicationName("My custom app name");
+    //app.setApplicationName("My custom app name");
     app.setOrganizationName("My organization");
     app.setOrganizationDomain("myorganization.com");
 

@@ -33,27 +33,30 @@ win32{
 }
 
 mkdir.depends = rmdir
-mkdir.commands =  $(MKDIR) '"$$shell_path($$DDIR/publicLibs)"'
-
+win32{
+mkdir.commands =  $(MKDIR) '"$$shell_path($$DDIR/publicLibs)"' & $(MKDIR) '"$$shell_path($$DDIR/main)"'
+}else{
+mkdir.commands =  $(MKDIR) '"$$shell_path($$DDIR/publicLibs)"' ; $(MKDIR) '"$$shell_path($$DDIR/main)"'
+}
 copy_lib.depends =mkdir
 win32{
-    win32:CONFIG(release, debug|release): copy_lib.commands = $(COPY_FILE) '"$$shell_path($$OUT_PWD/../privateProject/release/privateProject.lib)"' '"$$shell_path($$DDIR/)"'
-    else:win32:CONFIG(debug, debug|release): copy_lib.commands = $(COPY_FILE) '"$$shell_path( $$OUT_PWD/../privateProject/debug/privateProject.lib)"' '"$$shell_path($$DDIR/)"'
+    win32:CONFIG(release, debug|release): copy_lib.commands = $(COPY_FILE) '"$$shell_path($$OUT_PWD/../privateProject/release/privateProject.lib)"' '"$$shell_path($$DDIR/main)"'
+    else:win32:CONFIG(debug, debug|release): copy_lib.commands = $(COPY_FILE) '"$$shell_path( $$OUT_PWD/../privateProject/debug/privateProject.lib)"' '"$$shell_path($$DDIR/main)"'
 }else{
-    copy_lib.commands = $(COPY_FILE) '"$$shell_path($$OUT_PWD/../privateProject/libprivateProject)"'*.a  '"$$shell_path($$DDIR/)"'
+    copy_lib.commands = $(COPY_FILE) '"$$shell_path($$OUT_PWD/../privateProject/libprivateProject)"'*.a  '"$$shell_path($$DDIR/main)"'
 }
 
 copy_pri.depends = copy_lib
-copy_pri.commands =$(COPY_FILE) '"$$shell_path($$PWD/../privateProject/privateProjectQtModules.pri)"' '"$$shell_path($$DDIR/)"'
+copy_pri.commands =$(COPY_FILE) '"$$shell_path($$PWD/../privateProject/privateProjectQtModules.pri)"' '"$$shell_path($$DDIR/main)"'
 
 copy_h.depends = copy_pri
-copy_h.commands =$(COPY_FILE) '"$$shell_path($$PWD/../privateProject/main.h)"' '"$$shell_path($$DDIR/)"'
+copy_h.commands =$(COPY_FILE) '"$$shell_path($$PWD/../privateProject/main.h)"' '"$$shell_path($$DDIR/main)"'
 
 copy_h2.depends =copy_h
-copy_h2.commands =$(COPY_FILE) '"$$shell_path($$PWD/../config.pri)"' '"$$shell_path($$DDIR/)"'
+copy_h2.commands =$(COPY_FILE) '"$$shell_path($$PWD/../config.pri)"' '"$$shell_path($$DDIR/main)"'
 
 copy_main.depends = copy_h2
-copy_main.commands = $(COPY_DIR)  '"$$shell_path($$PWD/../main/)"'* '"$$shell_path($$DDIR/)"'
+copy_main.commands = $(COPY_DIR)  '"$$shell_path($$PWD/../main/)"'* '"$$shell_path($$DDIR/main)"'
 
 
 copy_publicLibs.depends = copy_main
@@ -61,7 +64,7 @@ copy_publicLibs.commands= $(COPY_DIR) '"$$shell_path($$PWD/../publicLibs/)"'* '"
 
 
 copy_subdirsProject.depends = copy_publicLibs
-copy_subdirsProject.commands=$(COPY_FILE) '"$$shell_path($$PWD/../main/main.pro)"' '"$$shell_path($$DDIR/$$TARGET".pro")"'
+copy_subdirsProject.commands=$(COPY_FILE) '"$$shell_path($$PWD/../deployProject/subdirsTemplate.pro)"' '"$$shell_path($$DDIR/$$TARGET".pro")"'
 
 
 zip.depends = copy_subdirsProject
