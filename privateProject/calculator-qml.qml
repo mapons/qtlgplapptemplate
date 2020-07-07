@@ -53,7 +53,9 @@ import QtQuick 2.5
 import QtQuick.Controls 2.12
 import QtQuick.Window 2.2
 import QtScxml 5.8
-import "qrc:/qtlegal/"
+
+import "qrc:/qtlegal/"  //QTLEGAL LGPL WIDGET
+
 Window {
     id: window
     visible: true
@@ -168,7 +170,7 @@ Window {
                     text: "="
                     onClicked: statemachine.submitEvent("EQUALS")
                 }
-                CustomButton {
+                CustomButton {// ABOUT BUTTON
                     id: aboutButton
                     x: 3 * width
                     y: parent.height / 5*3
@@ -178,14 +180,14 @@ Window {
                     height: y * 2
                     color: pressed ? "#46a2da" : "white"
                     text: "ABOUT\nDEMO"
-                    onClicked: stackView.push(licenseBrowser)
+                    onClicked: stackView.push(licenseBrowser)//QTLEGAL LGPL WIDGET
                 }
             }
         }
     }
 
     Component{
-        id:licenseBrowser
+        id:licenseBrowser //QTLEGAL LGPL WIDGET
         LicenseBrowser{
             extraLicenseText:"<p>"+qsTr("CREDITS")+"</p><p>"+qsTr("Designer")+": USER</p><p>Music: www.bensound.com</p>\
 <p>Emojis vector graphics:twemoji <p><a  href=\"https://twemoji.twitter.com/\">https://twemoji.twitter.com/</a></p>\
@@ -197,8 +199,8 @@ Window {
 <p>Toilet paper vector by Sojtin <p><a  href=\"https://www.iconfinder.com/Sojtin\">https://www.iconfinder.com/Sojtin</a></p>\
 <p>Toilet paper vector by tahsintahil <p><a  href=\"https://www.iconfinder.com/tahsintahil\">https://www.iconfinder.com/tahsintahil</a></p>"
 
-            urlBinaries:"https://github.com/dianiux-innova/doubleemoji"
-            onBack:stackView.pop()
+            urlBinaries:"https://github.com/dianiux-innova/doubleemoji" //URL WITH release.zip
+            onBack:stackView.pop() //back button
         }
     }
 
