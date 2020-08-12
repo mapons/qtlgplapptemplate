@@ -73,7 +73,7 @@ contains(ADDZIPTORESOURCES, 'yes'):{
         zip.commands='"$$shell_path($$PWD/7za.exe)"' a -mx=9 -r $$shell_path($$PWD"/../main/release.zip") $$shell_path(../$$TARGET) # ojo, esto me lo mete en el directorio home
     }else{
         #zip.commands=zip -8 -r  '"$$shell_path($$PWD/../main/release.zip)"' '"$$shell_path(../$$TARGET)"' # ojo, esto me lo mete en el directorio home
-        zip.commands=cd .. ;zip -8 -r  '"$$shell_path($$PWD/../main/release.zip)"' '"$$TARGET"'' # ojo, esto me lo mete en el directorio home
+        zip.commands=cd .. ;zip -8 -r  '"$$shell_path($$PWD/../main/release.zip)"' '"$$TARGET"' # ojo, esto me lo mete en el directorio home
     }
 }else{
     win32{
