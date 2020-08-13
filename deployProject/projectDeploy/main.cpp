@@ -371,9 +371,9 @@ int main(int argc, char *argv[])
 
         std::cout<<"DONE"<<std::endl;
         outfile<<"DONE" <<std::endl;
+
     }catch(const std::exception &e){
         std::cerr<<"ERROR EXCEPTION "<<e.what()<<std::endl;
-
         return EXIT_FAILURE;
     }
 
