@@ -78,7 +78,7 @@ bool scanQmlDir(const std::string &directory,const std::string &outputFile )
 
 void stringNormalize(std::string &str){
 
-#ifdef win32
+#ifdef WIN32
     std::replace(str.begin(), str.end(), '/', '\\');
 #endif
     str.erase(std::remove(str.begin(), str.end(), '\''),str.end());
@@ -138,8 +138,8 @@ int main(int argc, char *argv[])
         std::ofstream outfile ("deployProject.txt");
 
 
-        std::cout<<"STARTING PROJECT DEPLOY "<<sprivateprojectFolderName<<" -> "<<destinationFolder<<std::endl;
-        outfile<<"STARTING PROJECT DEPLOY "<<sprivateprojectFolderName<<" -> "<<destinationFolder<<std::endl;
+        std::cout<<"STARTING PROJECT DEPLOY "<<projectFolderName<<" -> "<<destinationFolder<<std::endl;
+        outfile<<"STARTING PROJECT DEPLOY "<<projectFolderName<<" -> "<<destinationFolder<<std::endl;
 
         //SCAM QML PROJECT DEPENDECIES
         if(!scanQmlDir(sprivateprojectFolderName,sqmlFile)) {
@@ -211,15 +211,18 @@ int main(int argc, char *argv[])
 
         //COPY PRIVATE LIBRARY
         {
-#ifdef win32
-            std::string libprivateOri=sdFolder +"\\privateProject\\" + (release?"release\\":"debug\\")   +  "privateProject.lib";
+#ifdef WIN32
+            std::string libprivateOri= destinationFolder +"\\privateProject\\" + (release?"release\\":"debug\\")   +  "privateProject.lib";
             stringNormalize(libprivateOri);
+            std::string libprivateDest=deployFolder+"/main/privateProject.lib";
+            stringNormalize(libprivateDest);
 #else
             std::string libprivateOri=destinationFolder +"/privateProject/libprivateProject.a";
             stringNormalize(libprivateOri);
-#endif
             std::string libprivateDest=deployFolder+"/main/libprivateProject.a";
             stringNormalize(libprivateDest);
+#endif
+
             std::error_code ec;
             fs::copy(libprivateOri,libprivateDest,ec);
 

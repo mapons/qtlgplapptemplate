@@ -82,7 +82,11 @@ DISTFILES += \
     $$PWD/projectDeployMacx \
     $$PWD/7za.dll \
     $$PWD/7zxa.dll \
-    $$PWD/7za.exe
+    $$PWD/7za.exe \
+    Vs2019/projectDeployWin.sln \
+    Vs2019/projectDeployWin.vcxproj \
+    Vs2019/projectDeployWin.vcxproj.filters \
+    Vs2019/projectDeployWin.vcxproj.user
 
 
 

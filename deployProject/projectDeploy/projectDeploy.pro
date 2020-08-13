@@ -1,5 +1,5 @@
 TEMPLATE = app
-
+#TEMPLATE = vcapp # generar proyecto VS para compilacion estatica
 
 QT -= gui core
 
@@ -13,7 +13,7 @@ SOURCES = main.cpp
 
 
 win32{
-    CONFIG += static
+    CONFIG += static # VS BUG??
     TARGET = projectDeployWin
 }
 
