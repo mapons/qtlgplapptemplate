@@ -19,6 +19,7 @@ win32{
 
 unix{
   macx {
+CONFIG += static
      TARGET = projectDeployMacx
      DEFINES += NO_STD_FILESYSTEM # MAC OS SIERRA MISSING C++17  STD:.FILESYSTEM SUPPORT
   }
