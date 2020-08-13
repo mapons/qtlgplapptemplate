@@ -11,6 +11,12 @@ ORI_RESOURCES= $$RESOURCES
 #LGPL QTLEGAL QML WIDGET
 include($$PWD/qtlegal/legal.pri)
 
+
+#example external library
+include($$PWD/zlib-1.2.11/zlib.pri)
+include($$PWD/quazip-master/quazip.pri)
+
+
 #EXAMPLE LIBRARY2
 #include($$PWD/qrimageprovider/qrimageprovider.pri)
 
@@ -38,3 +44,5 @@ equals(TEMPLATE , app){ # only for APP
  SOURCES=$$ORI_SOURCES
  RESOURCES=$$ORI_RESOURCES
 }
+
+

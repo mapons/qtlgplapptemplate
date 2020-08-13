@@ -57,6 +57,8 @@
 #include "main.h" //ADD THIS INCLUDE
 #include "QtLegal.h" //optional Qt legal widget
 
+//test external library
+#include <JlCompress.h>
 int _main(int argc, char *argv[]) //rename main to _main
 {
     // https://doc.qt.io/qt-5/qdir.html#Q_INIT_RESOURCE
@@ -81,6 +83,10 @@ int _main(int argc, char *argv[]) //rename main to _main
     if (engine.rootObjects().isEmpty())
         return -1;
 
+    QuaZip zip("zipFile.zip");
+    zip.open(QuaZip::mdUnzip);
+
+ JlCompress::compressFile("text.zip","main.o");
     return app.exec();
 }
 
