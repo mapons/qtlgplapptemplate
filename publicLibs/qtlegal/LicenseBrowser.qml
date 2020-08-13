@@ -15,7 +15,7 @@
 ****************************************************************************/
 
 import QtQuick 2.7
-import QtQuick.Controls 2.12
+import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtLegal 1.0
 
@@ -175,7 +175,9 @@ Pane {
             wrapMode:Text.WrapAnywhere
         }
         standardButtons: Dialog.Ok
-        anchors.centerIn: parent
+        //anchors.centerIn: parent
+        y:(parent.height-height)/2
+        height: parent.height/2
         width: about.width
     }
 }

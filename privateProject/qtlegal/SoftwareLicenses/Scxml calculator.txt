@@ -1,42 +1,38 @@
 <html>
-   <head>
-      <meta content="text/html; charset=UTF-8" http-equiv="content-type">
-      <style type="text/css">ol{margin:0;padding:0}table td,table th{padding:0}.c3{color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:11pt;font-family:"Arial";font-style:normal}.c4{color:#000000;font-weight:700;text-decoration:none;vertical-align:baseline;font-size:12pt;font-family:"Arial";font-style:normal}.c0{padding-top:0pt;padding-bottom:0pt;line-height:1.15;orphans:2;widows:2;text-align:left}.c5{text-decoration-skip-ink:none;-webkit-text-decoration-skip:none;color:#1155cc;text-decoration:underline}.c2{background-color:#ffffff;max-width:451.4pt;padding:72pt 72pt 72pt 72pt}.c6{color:inherit;text-decoration:inherit}.c1{height:11pt}.title{padding-top:0pt;color:#000000;font-size:26pt;padding-bottom:3pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}.subtitle{padding-top:0pt;color:#666666;font-size:15pt;padding-bottom:16pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}li{color:#000000;font-size:11pt;font-family:"Arial"}p{margin:0;color:#000000;font-size:11pt;font-family:"Arial"}h1{padding-top:20pt;color:#000000;font-size:20pt;padding-bottom:6pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h2{padding-top:18pt;color:#000000;font-size:16pt;padding-bottom:6pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h3{padding-top:16pt;color:#434343;font-size:14pt;padding-bottom:4pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h4{padding-top:14pt;color:#666666;font-size:12pt;padding-bottom:4pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h5{padding-top:12pt;color:#666666;font-size:11pt;padding-bottom:4pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h6{padding-top:12pt;color:#666666;font-size:11pt;padding-bottom:4pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;font-style:italic;orphans:2;widows:2;text-align:left}</style>
-   </head>
    <body class="c2">
       <p class="c0"><span class="c4">Scxml calculator-qml</span></p>
-      <p class="c0"><span class="c5"><a class="c6" href="https://www.google.com/url?q=https://code.qt.io/cgit/qt/qtscxml.git/tree/examples/scxml/calculator-qml?h%3D5.15&amp;sa=D&amp;ust=1593779529478000&amp;usg=AOvVaw1cGpfvhVjWfVTTG-4JpRNh">https://code.qt.io/cgit/qt/qtscxml.git/tree/examples/scxml/calculator-qml?h=5.15</a></span></p>
+      <p class="c0"><span class="c5"><a class="c6" href="https://code.qt.io/cgit/qt/qtscxml.git/tree/examples/scxml/calculator-qml">https://code.qt.io/cgit/qt/qtscxml.git/tree/examples/scxml/calculator-qml</a></span></p>
       <p class="c0 c1"><span class="c3"></span></p>
       <p class="c0 c1"><span class="c3"></span></p>
       <p class="c0"><span class="c3">BSD License Usage</span></p>
-      <p class="c0"><span class="c3">&nbsp;Alternatively, you may use this file under the terms of the BSD license</span></p>
-      <p class="c0"><span class="c3">&nbsp;as follows:</span></p>
+      <p class="c0"><span class="c3">Alternatively, you may use this file under the terms of the BSD license</span></p>
+      <p class="c0"><span class="c3">as follows:</span></p>
       <p class="c0 c1"><span class="c3"></span></p>
-      <p class="c0"><span class="c3">&nbsp;&quot;Redistribution and use in source and binary forms, with or without</span></p>
-      <p class="c0"><span class="c3">&nbsp;modification, are permitted provided that the following conditions are</span></p>
-      <p class="c0"><span class="c3">&nbsp;met:</span></p>
-      <p class="c0"><span class="c3">&nbsp; &nbsp;* Redistributions of source code must retain the above copyright</span></p>
-      <p class="c0"><span class="c3">&nbsp; &nbsp; &nbsp;notice, this list of conditions and the following disclaimer.</span></p>
-      <p class="c0"><span class="c3">&nbsp; &nbsp;* Redistributions in binary form must reproduce the above copyright</span></p>
-      <p class="c0"><span class="c3">&nbsp; &nbsp; &nbsp;notice, this list of conditions and the following disclaimer in</span></p>
-      <p class="c0"><span class="c3">&nbsp; &nbsp; &nbsp;the documentation and/or other materials provided with the</span></p>
-      <p class="c0"><span class="c3">&nbsp; &nbsp; &nbsp;distribution.</span></p>
-      <p class="c0"><span class="c3">&nbsp; &nbsp;* Neither the name of The Qt Company Ltd nor the names of its</span></p>
-      <p class="c0"><span class="c3">&nbsp; &nbsp; &nbsp;contributors may be used to endorse or promote products derived</span></p>
-      <p class="c0"><span class="c3">&nbsp; &nbsp; &nbsp;from this software without specific prior written permission.</span></p>
+      <p class="c0"><span class="c3">&quot;Redistribution and use in source and binary forms, with or without</span></p>
+      <p class="c0"><span class="c3">modification, are permitted provided that the following conditions are</span></p>
+      <p class="c0"><span class="c3">met:</span></p>
+      <p class="c0"><span class="c3"> * Redistributions of source code must retain the above copyright</span></p>
+      <p class="c0"><span class="c3">  notice, this list of conditions and the following disclaimer.</span></p>
+      <p class="c0"><span class="c3"> * Redistributions in binary form must reproduce the above copyright</span></p>
+      <p class="c0"><span class="c3">  notice, this list of conditions and the following disclaimer in</span></p>
+      <p class="c0"><span class="c3">  the documentation and/or other materials provided with the</span></p>
+      <p class="c0"><span class="c3">  distribution.</span></p>
+      <p class="c0"><span class="c3"> * Neither the name of The Qt Company Ltd nor the names of its</span></p>
+      <p class="c0"><span class="c3">  contributors may be used to endorse or promote products derived</span></p>
+      <p class="c0"><span class="c3">  from this software without specific prior written permission.</span></p>
       <p class="c0 c1"><span class="c3"></span></p>
       <p class="c0 c1"><span class="c3"></span></p>
-      <p class="c0"><span class="c3">&nbsp;THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS</span></p>
-      <p class="c0"><span class="c3">&nbsp;&quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</span></p>
-      <p class="c0"><span class="c3">&nbsp;LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR</span></p>
-      <p class="c0"><span class="c3">&nbsp;A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT</span></p>
-      <p class="c0"><span class="c3">&nbsp;OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,</span></p>
-      <p class="c0"><span class="c3">&nbsp;SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT</span></p>
-      <p class="c0"><span class="c3">&nbsp;LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,</span></p>
-      <p class="c0"><span class="c3">&nbsp;DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY</span></p>
-      <p class="c0"><span class="c3">&nbsp;THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</span></p>
-      <p class="c0"><span class="c3">&nbsp;(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span></p>
-      <p class="c0"><span class="c3">&nbsp;OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.&quot;</span></p>
+      <p class="c0"><span class="c3">THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS</span></p>
+      <p class="c0"><span class="c3">&quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</span></p>
+      <p class="c0"><span class="c3">LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR</span></p>
+      <p class="c0"><span class="c3">A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT</span></p>
+      <p class="c0"><span class="c3">OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,</span></p>
+      <p class="c0"><span class="c3">SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT</span></p>
+      <p class="c0"><span class="c3">LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,</span></p>
+      <p class="c0"><span class="c3">DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY</span></p>
+      <p class="c0"><span class="c3">THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</span></p>
+      <p class="c0"><span class="c3">(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span></p>
+      <p class="c0"><span class="c3">OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.&quot;</span></p>
       <p class="c0 c1"><span class="c3"></span></p>
    </body>
 </html>
