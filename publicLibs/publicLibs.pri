@@ -14,6 +14,7 @@ include($$PWD/qtlegal/legal.pri)
 
 #example external library
 include($$PWD/zlib-1.2.11/zlib.pri)
+DEFINES += QUAZIP_STATIC
 include($$PWD/quazip-master/quazip.pri)
 
 
