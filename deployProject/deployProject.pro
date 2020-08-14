@@ -31,7 +31,7 @@ unix{
 }
 
 
-makedependencies.commands = '"$$shell_path($$PWD/$$SCANNERCOMMAND)"' -f "'"$$shell_path($$PWD/../)"'" -d "'"$$shell_path($$OUT_PWD/../)"'" -p $$TARGET -r $$RELEASEMODE -z "'"$$shell_path($$ZIPFILE)"'"
+makedependencies.commands = '"$$shell_path($$PWD/$$SCANNERCOMMAND)"' -f "'"$$shell_path($$PWD/../)"'" -d "'"$$shell_path($$OUT_PWD/../)"'" -p $$TARGET -r $$RELEASEMODE -z "'"$$shell_path($$ZIPFILE)"'" -v
 
 
 
@@ -43,14 +43,14 @@ contains(ADDZIPTORESOURCES, 'yes'):{
         zip.commands='"$$shell_path($$PWD/7za.exe)"' a -mx=9 -r $$shell_path($$PWD"/../main/release.zip") $$shell_path(../$$TARGET) # ojo, esto me lo mete en el directorio home
     }else{
         #zip.commands=zip -8 -r  '"$$shell_path($$PWD/../main/release.zip)"' '"$$shell_path(../$$TARGET)"' # ojo, esto me lo mete en el directorio home
-        zip.commands=cd .. ;zip -8 -r  '"$$shell_path($$PWD/../main/release.zip)"' '"$$TARGET"' # ojo, esto me lo mete en el directorio home
+        zip.commands=cd .. ;zip -9 -r  '"$$shell_path($$PWD/../main/release.zip)"' '"$$TARGET"' # ojo, esto me lo mete en el directorio home
     }
 }else{
     win32{
         zip.commands='"$$shell_path($$PWD/7za.exe)"' a -mx=9 -r  $$shell_path($$OUT_PWD"/../release.zip") $$shell_path(../$$TARGET)
     }else{
         #zip.commands=zip -7 -r  '"$$shell_path($$OUT_PWD/../release.zip)"' '"$$shell_path(../$$TARGET)"'
-        zip.commands=cd .. ; zip -7 -r  release.zip '"$$TARGET"'
+        zip.commands=cd .. ; zip -9 -r  release.zip '"$$TARGET"'
     }
 }
 
@@ -60,8 +60,8 @@ contains(GENERATEZIP, 'yes'):{
  QMAKE_EXTRA_TARGETS += makedependencies  zip
 }else{
  message("SKIPING ZIP FILE")
- PRE_TARGETDEPS +=      makedependencies
- QMAKE_EXTRA_TARGETS += makedependencies
+ #PRE_TARGETDEPS +=      makedependencies
+ #QMAKE_EXTRA_TARGETS += makedependencies
 }
 
 

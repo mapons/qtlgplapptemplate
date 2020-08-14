@@ -3,14 +3,30 @@
 TEMPLATE = lib # MUST BE LIBRARY,NOT APP
 CONFIG += staticlib # MUST BE STATIC LIBRARY
 CONFIG+=qtquickcompiler # PROTECT YOUR SOURCES
+android{
+#TARGET = privateProject
+    TARGET = privateProject_$${QT_ARCH}
+    #DEFINES += LIBS_SUFFIX='\\"_$${QT_ARCH}.so\\"'
+    QT += androidextras
+}else{
+    TARGET = privateProject
+}
+
 HEADERS += main.h
 DEFINES += BUILDMAINLIB  # macro _main()
 #include($$PWD/yourDotProProjectFile.pri) # YOUR ORIGINAL PRO FILE; RENAMED TO .PRI AND EDITED
 include($$PWD/privateProjectQtModules.pri) # ALL QT+= FOR YOUR PROJECT
 
+#OPTIONAL PUBLIC EXTERNAL LIBRARIES INCLUIDES ONLY
+exists($$PWD/../publicLibs/publicLibs.pri){
+    include($$PWD/../publicLibs/publicLibs.pri)
+    DEFINES+= DEFINED_PUBLIC_LIBS
+}
+#END MANDATORY CONFIGURATION
 
-
-
+#SOFTWARE VERSION MACRO
+VERSION=1.04
+DEFINES +=  BUILD_VERSION='"\\\"$$VERSION\\""'
 #BUILD DATE VARIABLE
 contains(QMAKE_HOST.os, Windows):{
     B_TIME = $$system("date /T")_$$system("time /T")# no spaces between 'system' command and args.
@@ -21,24 +37,8 @@ DEFINES += BUILD_DATE='"\\\"$$B_TIME\\\""'
 #FIN BUILD DATE
 
 
-#OPTIONAL PUBLIC EXTERNAL LIBRARIES INCLUIDES ONLY
-include($$PWD/../publicLibs/publicLibs.pri)
-
-android{
-    TARGET = privateProject_$${QT_ARCH}
-    DEFINES += LIBS_SUFFIX='\\"_$${QT_ARCH}.so\\"'
-}else{
-    TARGET = privateProject
-}
-
-
-#END MANDATORY CONFIGURATION
-
-#SOFTWARE VERSION MACRO
-VERSION=1.04
-DEFINES +=  BUILD_VERSION='"\\\"$$VERSION\\""'
-
-
+#LGPL QTLEGAL QML WIDGET
+include($$PWD/qtlegal/legal.pri)
 
 #TEMPLATE = app
 #TARGET = sidepanel
@@ -59,10 +59,13 @@ DEFINES +=  BUILD_VERSION='"\\\"$$VERSION\\""'
 
 CONFIG += c++11
 
-SOURCES += calculator-qml.cpp
+SOURCES += \
+    _main.cpp
 
-RESOURCES += calculator-qml.qrc  # RESOURCE FILE ... REMEMBER TO PUT Q_INIT_RESOURCE(calculator-qml); in _main() function
+RESOURCES += \  # calculator-qml.qrc # RESOURCE FILE ... REMEMBER TO PUT Q_INIT_RESOURCE(calculator-qml); in _main() function
+    privateProject.qrc
 
+#example MACHINE STATUS : REMOVE IT IN YOUR PROJECT
 STATECHARTS = statemachine.scxml
 
 

@@ -74,8 +74,6 @@ bool scanQmlDir(const std::string &directory,const std::string &outputFile )
     }
     return false;
 }
-
-
 void stringNormalize(std::string &str){
 
 #ifdef WIN32
@@ -83,6 +81,40 @@ void stringNormalize(std::string &str){
 #endif
     str.erase(std::remove(str.begin(), str.end(), '\''),str.end());
 }
+
+int copyLibs(const std::string &originDirectory,const std::string &destDirectory )
+{
+    int copiedFiles=0;
+    std::vector<std::string> importList;
+    std::regex re("^[ ]*import[ ]+[azA-Z]+");
+    auto dirIt2=fs::directory_iterator(originDirectory);
+    for(auto& p: dirIt2){
+        if(p.path().extension() == ".a"){
+            std::string libprivateOri=p.path();
+
+            std::string libprivateDest=destDirectory;
+            stringNormalize(libprivateDest);
+
+
+            std::error_code ec;
+            fs::copy(libprivateOri,libprivateDest,ec);
+
+            if(ec.value()) {
+                std::cerr<<"ERROR COPY "<<libprivateOri<<" --> "<<libprivateDest <<" "<<ec.message()<<std::endl;
+
+
+            }else copiedFiles++;
+
+
+        }
+
+    }
+
+return copiedFiles;
+}
+
+
+
 
 
 int main(int argc, char *argv[])
@@ -174,8 +206,8 @@ int main(int argc, char *argv[])
         stringNormalize(deployFolder);
         auto ret=fs::remove_all(deployFolder);
         if(verbose){
-            std::cout << "REMOVED FOLDER "<<deployFolder<<ret<<std::endl;
-            outfile<< "REMOVED FOLDER "<<deployFolder<<ret<<std::endl;
+            std::cout << "REMOVED FOLDER "<<deployFolder<<" "<<ret<<std::endl;
+            outfile<< "REMOVED FOLDER "<<deployFolder<<" "<<ret<<std::endl;
         }
 
 
@@ -187,14 +219,26 @@ int main(int argc, char *argv[])
 
             std::string subfolder2=deployFolder+"/main";
             stringNormalize(subfolder2);
-            if(!fs::create_directories(subfolder1)) {
-                std::cerr<<"ERROR CREATING DIRECTORY "<<subfolder1<<std::endl;
-                outfile<<"ERROR CREATING DIRECTORY "<<subfolder1<<std::endl;
-                return EXIT_FAILURE;
-            }
-            if(verbose){
-                std::cout<<"CREATING DIRECTORY "<<subfolder1<<std::endl;
-                outfile<<"CREATING DIRECTORY "<<subfolder1<<std::endl;
+
+
+            std::string ori=sprojectFolderName +"/publicLibs/";
+            stringNormalize(ori);
+
+            if(fs::exists(ori)){
+                if(!fs::create_directories(subfolder1)) {
+                    std::cerr<<"ERROR CREATING DIRECTORY "<<subfolder1<<std::endl;
+                    outfile<<"ERROR CREATING DIRECTORY "<<subfolder1<<std::endl;
+                    return EXIT_FAILURE;
+                }
+                if(verbose){
+                    std::cout<<"CREATING DIRECTORY "<<subfolder1<<std::endl;
+                    outfile<<"CREATING DIRECTORY "<<subfolder1<<std::endl;
+                }
+            }else{
+                if(verbose){
+                    std::cout<<"SKIPPING DIRECTORY "<<ori<<std::endl;
+                    outfile<<"SKIPPING DIRECTORY "<<ori<<std::endl;
+                }
             }
             if(!fs::create_directories(subfolder2)) {
                 std::cerr<<"ERROR CREATING DIRECTORY "<<subfolder2<<std::endl;
@@ -205,6 +249,7 @@ int main(int argc, char *argv[])
                 std::cout<<"CREATING DIRECTORY "<<subfolder2<<std::endl;
                 outfile<<"CREATING DIRECTORY "<<subfolder2<<std::endl;
             }
+
         }
 
 
@@ -227,12 +272,25 @@ int main(int argc, char *argv[])
             fs::copy(libprivateOri,libprivateDest,ec);
 
             if(ec.value()) {
-                std::cerr<<"ERROR COPY "<<libprivateOri<<" --> "<<libprivateDest <<ec.message()<<std::endl;
-                outfile<<"ERROR COPY "<<libprivateOri<<" --> "<<libprivateDest <<ec.message()<<std::endl;
-                return EXIT_FAILURE;
+                std::string libprivateOriFolder=destinationFolder +"/privateProject/";
+                stringNormalize(libprivateOriFolder);
+                std::string libprivateDestFolder=deployFolder+"/main/";
+                stringNormalize(libprivateDestFolder);
+                //try copilibs
+                auto copied=copyLibs(libprivateOriFolder,libprivateDestFolder);
+                if(copied==0){
+                    std::cerr<<"ERROR COPY "<<libprivateOri<<" --> "<<libprivateDest <<" "<<ec.message()<<std::endl;
+                    outfile<<"ERROR COPY "<<libprivateOri<<" --> "<<libprivateDest <<" "<<ec.message()<<std::endl;
+                    return EXIT_FAILURE;
+                }else {
+                    if(verbose ){
+                        std::cout<<"COPIED "<<copied<<" "<<libprivateOriFolder<<" --> "<<libprivateDestFolder <<std::endl;
+                        outfile<<"COPIED "<<copied<<" "<<libprivateOriFolder<<" --> "<<libprivateDestFolder<<std::endl;
+                    }
 
+                }
             }
-            if(verbose){
+            if(verbose && !ec.value()){
                 std::cout<<"COPY "<<libprivateOri<<" --> "<<libprivateDest <<std::endl;
                 outfile<<"COPY "<<libprivateOri<<" --> "<<libprivateDest <<std::endl;
             }
@@ -331,22 +389,28 @@ int main(int argc, char *argv[])
         {
             std::string ori=sprojectFolderName +"/publicLibs/";
             stringNormalize(ori);
+            if(fs::exists(ori)){
+                std::string dest=deployFolder+"/publicLibs/";
+                stringNormalize(dest);
+                std::error_code ecCode;
+                const auto copyOptions = fs::copy_options::update_existing
+                        | fs::copy_options::recursive;
+                fs::copy(ori,dest,copyOptions,ecCode);
+                if(ecCode.value()) {
+                    std::cerr<<"ERROR COPY "<<ori<<" --> "<<dest <<" "<<ecCode.message()<<std::endl;
+                    outfile<<"ERROR COPY "<<ori<<" --> "<<dest <<" "<<ecCode.message()<<std::endl;
+                    return EXIT_FAILURE;
 
-            std::string dest=deployFolder+"/publicLibs/";
-            stringNormalize(dest);
-            std::error_code ecCode;
-            const auto copyOptions = fs::copy_options::update_existing
-                    | fs::copy_options::recursive;
-            fs::copy(ori,dest,copyOptions,ecCode);
-            if(ecCode.value()) {
-                std::cerr<<"ERROR COPY "<<ori<<" --> "<<dest <<" "<<ecCode.message()<<std::endl;
-                outfile<<"ERROR COPY "<<ori<<" --> "<<dest <<" "<<ecCode.message()<<std::endl;
-                return EXIT_FAILURE;
-
-            }
-            if(verbose){
-                std::cout<<"COPY "<<ori<<" --> "<<dest <<std::endl;
-                outfile<<" COPY "<<ori<<" --> "<<dest <<std::endl;
+                }
+                if(verbose){
+                    std::cout<<"COPY "<<ori<<" --> "<<dest <<std::endl;
+                    outfile<<" COPY "<<ori<<" --> "<<dest <<std::endl;
+                }
+            }else{
+                if(verbose){
+                    std::cout<<"SKIPPING DIRECTORY "<<ori<<std::endl;
+                    outfile<<"SKIPPING DIRECTORY "<<ori<<std::endl;
+                }
             }
         }
 

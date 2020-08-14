@@ -48,6 +48,8 @@ exists($$PWD/privateProjectQtModules.pri) {
 } else{
     exists($$PWD/../privateProject/privateProjectQtModules.pri) {
         include($$PWD/../privateProject/privateProjectQtModules.pri)
+    }else{
+        message("ERROR: privateProjectQtModules.pri NOT FOUND")
     }
 }
 
@@ -71,16 +73,20 @@ unix{
             PRE_TARGETDEPS += $$LIBPRIVATE
         }
 }
-INCLUDEPATH += $$PWD/../privateProject
-DEPENDPATH += $$PWD/../privateProject
-#END PRIVATE PROJECT
-
-#END MANDATORY
-
+exists($$PWD/../privateProject){
+ INCLUDEPATH += $$PWD/../privateProject
+ DEPENDPATH += $$PWD/../privateProject
+}
 
 
-#Add sources for open source
-#ADD OPTIONAL  LPGL EXTERNAL LIBRARIES (NO LIBS)
+#android{
+    #DEFINES += LIBS_SUFFIX='\\"_$${QT_ARCH}.so\\"'
+    #QT += androidextras
+#}
+
+
+#Add sources for open other open source LGPL libraries
+#OPTIONAL  LPGL EXTERNAL LIBRARIES
 exists($$PWD/publicLibs/publicLibs.pri) {
     include($$PWD/publicLibs/publicLibs.pri)
 } else{
@@ -88,8 +94,16 @@ exists($$PWD/publicLibs/publicLibs.pri) {
         include($$PWD/../publicLibs/publicLibs.pri)
     }
 }
+#END ADD OPTIONAL  LPGL EXTERNAL LIBRARIES
 
-#END ADD OPTIONAL  LPGL EXTERNAL LIBRARIES (NO LIBS)
+#END PRIVATE PROJECT
+
+#END MANDATORY
+
+
+
+
+
 
 
 

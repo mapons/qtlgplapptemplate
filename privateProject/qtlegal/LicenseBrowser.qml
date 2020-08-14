@@ -20,7 +20,7 @@ import QtQuick.Layouts 1.3
 import QtLegal 1.0
 
 
-Pane {
+Page {
     padding: 0
     id:about
     signal back()
@@ -36,18 +36,20 @@ Pane {
     Keys.onPressed:  {
         if (event.key === Qt.Key_Back  || event.key === Qt.Key_Left  ) {
             event.accepted=true;
-           // stackView.pop()
+            about.back()
+            console.log("KEY BACK")
         }
     }
-
+header:
     ToolBar {
         id:toolbar
-        width: parent.width
+        //width: parent.width
         RowLayout {
             anchors.fill: parent
             ToolButton {
                 text: "<"
-                font.pointSize: 20
+                 font.pixelSize: parent.height*.8
+                //font.pointSize: 20
                 onClicked:{
                     about.back()
                 }
@@ -58,7 +60,8 @@ Pane {
             id: titleLabel
             text: qsTr("LEGAL")
             // font.family: "Arial"
-            font.pixelSize: 20
+          //  font.pixelSize: parent.height*.8
+           // font.pixelSize: 20
             elide: Label.ElideRight
             horizontalAlignment: Qt.AlignHCenter
             verticalAlignment: Qt.AlignVCenter
@@ -66,13 +69,13 @@ Pane {
         }
     }
     Item {
-        anchors.margins: parent.width*.03
+       /* anchors.margins: parent.width*.03
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: toolbar.bottom
-        anchors.bottom: bar.top
-
-
+        anchors.bottom: bar.top*/
+anchors.fill: parent
+anchors.margins: parent.width*.03
         StackLayout {
             id:stly
             /*       width: parent.width
@@ -149,7 +152,7 @@ Pane {
 
         }
     }
-    TabBar {
+    footer:TabBar {
         id: bar
         width: parent.width
         anchors.bottom: parent.bottom
