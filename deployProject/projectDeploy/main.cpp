@@ -85,30 +85,44 @@ void stringNormalize(std::string &str){
 int copyLibs(const std::string &originDirectory,const std::string &destDirectory )
 {
     int copiedFiles=0;
-    std::vector<std::string> importList;
-    std::regex re("^[ ]*import[ ]+[azA-Z]+");
     auto dirIt2=fs::directory_iterator(originDirectory);
     for(auto& p: dirIt2){
         if(p.path().extension() == ".a"){
-            std::string libprivateOri=p.path();
+            auto libprivateOri=p.path();
 
             std::string libprivateDest=destDirectory;
             stringNormalize(libprivateDest);
-
 
             std::error_code ec;
             fs::copy(libprivateOri,libprivateDest,ec);
 
             if(ec.value()) {
                 std::cerr<<"ERROR COPY "<<libprivateOri<<" --> "<<libprivateDest <<" "<<ec.message()<<std::endl;
-
-
             }else copiedFiles++;
 
 
         }
 
     }
+
+#ifdef WIN32
+    if(copiedFiles==0){
+        for(auto& p: dirIt2){
+            if(p.path().extension() == ".lib"){
+                auto libprivateOri=p.path();
+
+                std::string libprivateDest=destDirectory;
+                stringNormalize(libprivateDest);
+
+                std::error_code ec;
+                fs::copy(libprivateOri,libprivateDest,ec);
+                if(ec.value()) {
+                    std::cerr<<"ERROR COPY "<<libprivateOri<<" --> "<<libprivateDest <<" "<<ec.message()<<std::endl;
+                }else copiedFiles++;
+            }
+        }
+    }
+#endif
 
 return copiedFiles;
 }
@@ -261,6 +275,13 @@ int main(int argc, char *argv[])
             stringNormalize(libprivateOri);
             std::string libprivateDest=deployFolder+"/main/privateProject.lib";
             stringNormalize(libprivateDest);
+
+            std::string libprivateOri2= destinationFolder +"/privateProject/" + (release?"release/":"debug/")   +  "libprivateProject.a";
+            stringNormalize(libprivateOri2);
+            std::string libprivateDest2=deployFolder+"/main/libprivateProject.a";
+            stringNormalize(libprivateDest2);
+
+
 #else
             std::string libprivateOri=destinationFolder +"/privateProject/libprivateProject.a";
             stringNormalize(libprivateOri);
@@ -270,17 +291,27 @@ int main(int argc, char *argv[])
 
             std::error_code ec;
             fs::copy(libprivateOri,libprivateDest,ec);
-
-            if(ec.value()) {
+#ifdef WIN32
+            if(ec.value()){ //MAYBE MINGW .a files?
+                ec.clear();
+                fs::copy(libprivateOri2,libprivateDest2,ec);
+            }
+#endif
+            if(ec.value())
+            {
+#ifdef WIN32
+                std::string libprivateOriFolder=destinationFolder +"/privateProject/release";
+#else
                 std::string libprivateOriFolder=destinationFolder +"/privateProject/";
+#endif
                 stringNormalize(libprivateOriFolder);
                 std::string libprivateDestFolder=deployFolder+"/main/";
                 stringNormalize(libprivateDestFolder);
                 //try copilibs
                 auto copied=copyLibs(libprivateOriFolder,libprivateDestFolder);
                 if(copied==0){
-                    std::cerr<<"ERROR COPY "<<libprivateOri<<" --> "<<libprivateDest <<" "<<ec.message()<<std::endl;
-                    outfile<<"ERROR COPY "<<libprivateOri<<" --> "<<libprivateDest <<" "<<ec.message()<<std::endl;
+                    std::cerr<<"ERROR COPY "<<libprivateOriFolder<<" --> "<<libprivateDestFolder <<" "<<ec.message()<<std::endl;
+                    outfile<<"ERROR COPY "<<libprivateOriFolder<<" --> "<<libprivateDestFolder <<" "<<ec.message()<<std::endl;
                     return EXIT_FAILURE;
                 }else {
                     if(verbose ){

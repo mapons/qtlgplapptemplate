@@ -13,8 +13,10 @@ SOURCES = main.cpp
 
 
 win32{
-    CONFIG += static # VS BUG??
+    CONFIG += static # VS BUG?? USO MINGW
     TARGET = projectDeployWin
+    DEFINES += NO_STD_FILESYSTEM
+    QMAKE_LFLAGS += -static -s #MINGW ONLY
 }
 
 unix{
