@@ -189,15 +189,8 @@ Window {
     Component{
         id:licenseBrowser //QTLEGAL LGPL WIDGET
         LicenseBrowser{
-            extraLicenseText:"<p>"+qsTr("CREDITS")+"</p><p>"+qsTr("Designer")+": USER</p><p>Music: www.bensound.com</p>\
-<p>Emojis vector graphics:twemoji <p><a  href=\"https://twemoji.twitter.com/\">https://twemoji.twitter.com/</a></p>\
-<p>Christmas vector graphics:designed by freepik <p><a  href=\"www.freepik.com\">www.freepik.com/</a></p>\
-
-<p>Toilet paper vector by Utha_design <p><a  href=\"https://www.iconfinder.com/Utha_design\">https://www.iconfinder.com/Utha_design</a></p>\
-<p>Toilet paper vector by pocike <p><a  href=\"https://www.iconfinder.com/pocike\">https://www.iconfinder.com/pocike</a></p>\
-<p>Toilet paper vector by Florent72 <p><a  href=\"https://www.iconfinder.com/Florent72\">https://www.iconfinder.com/Florent72</a></p>\
-<p>Toilet paper vector by Sojtin <p><a  href=\"https://www.iconfinder.com/Sojtin\">https://www.iconfinder.com/Sojtin</a></p>\
-<p>Toilet paper vector by tahsintahil <p><a  href=\"https://www.iconfinder.com/tahsintahil\">https://www.iconfinder.com/tahsintahil</a></p>"
+            extraLicenseText:"<p>"+qsTr("CREDITS")+"</p><p>" +
+"<p>Dianiux Innova SL <p><a  href=\"https://www.dianiuxinnova.com\">https://www.dianiuxinnova.com</a></p>"
 
             urlBinaries:"https://github.com/dianiux-innova/doubleemoji" //URL WITH release.zip
             onBack:stackView.pop() //back button

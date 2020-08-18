@@ -25,8 +25,9 @@ exists($$PWD/../publicLibs/publicLibs.pri){
 #END MANDATORY CONFIGURATION
 
 #SOFTWARE VERSION MACRO
-VERSION=1.04
+VERSION=1.0
 DEFINES +=  BUILD_VERSION='"\\\"$$VERSION\\""'
+
 #BUILD DATE VARIABLE
 contains(QMAKE_HOST.os, Windows):{
     B_TIME = $$system("date /T")_$$system("time /T")# no spaces between 'system' command and args.

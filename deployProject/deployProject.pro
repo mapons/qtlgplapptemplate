@@ -55,7 +55,7 @@ contains(ADDZIPTORESOURCES, 'yes'):{
 }
 
 contains(GENERATEZIP, 'yes'):{
- message("GENERATING ZIP FILE")
+ message("GENERATING release.zip FILE. QT VERSION: "$$QT_VERSION "QMAKE:" $$QMAKE_QMAKE)
  PRE_TARGETDEPS +=      makedependencies  zip
  QMAKE_EXTRA_TARGETS += makedependencies  zip
 }else{
@@ -63,7 +63,6 @@ contains(GENERATEZIP, 'yes'):{
  #PRE_TARGETDEPS +=      makedependencies
  #QMAKE_EXTRA_TARGETS += makedependencies
 }
-
 
 DISTFILES += \
     $$PWD/subdirsTemplate.pro \

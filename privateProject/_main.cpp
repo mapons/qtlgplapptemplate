@@ -5,8 +5,8 @@
 
 #include "main.h" //MANDATORY: ADD THIS INCLUDE
 
-
 #include "QtLegal.h" //optional Qt legal widget
+
 
 //example MACHINE STATUS : REMOVE IT IN YOUR PROJECT
 #include "statemachine.h"
@@ -37,7 +37,8 @@ int _main(int argc, char *argv[]) //rename main to _main
 
 
     //OPTIONAL:register QML legal component
-    QtLegal::instance()->setVersionData("v0.1",BUILD_DATE,":/CHANGELOG.txt");
+    app.setApplicationVersion(BUILD_VERSION);
+    QtLegal::instance()->setVersionData(app.applicationVersion(),BUILD_DATE,":/CHANGELOG.txt");
 
     //example MACHINE STATUS
     qmlRegisterType<CalculatorStateMachine>("CalculatorStateMachine", 1, 0,

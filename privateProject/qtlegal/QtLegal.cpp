@@ -107,7 +107,7 @@ QString  const QtLegal::aboutQT()
         "<p>Qt and the Qt logo are trademarks of The Qt Company Ltd.</p>"
         "<p>Qt is The Qt Company Ltd product developed as an open source "
         "project. See <a href=\"http://%3/\">%3</a> for more information.</p>"
-        ).arg(QStringLiteral("2019"),
+        ).arg(QStringLiteral("2020"),
               QStringLiteral("qt.io/licensing"),
               QStringLiteral("qt.io"));
   return translatedTextAboutQtCaption+ translatedTextAboutQtText;
@@ -191,7 +191,7 @@ void QtLegal::setVersionData(const QString &version,const QString &buildDate,con
     if(buildDate.size()>0) Versioninfo+=QObject::tr("BUILD DATE") +" "+buildDate+"</p>";
 
     Versioninfo+="<p>"+QObject::tr("SYSTEM")+" "+QSysInfo::prettyProductName()+ " " +QSysInfo::buildAbi()+" "+QSysInfo::currentCpuArchitecture()+"</p>";
-    Versioninfo+="<p>"+QObject::tr("QT")+" V"+ QLatin1String(QT_VERSION_STR)+"</p>";
+    Versioninfo+="<p>"+QObject::tr("QT")+" V"+ QLatin1String(QT_VERSION_STR)+ "</p>";
 
     m_extendedversion=Versioninfo;//otrher options
     m_version=version;
