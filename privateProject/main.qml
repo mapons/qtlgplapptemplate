@@ -192,7 +192,7 @@ Window {
             extraLicenseText:"<p>"+qsTr("CREDITS")+"</p><p>" +
 "<p>Dianiux Innova SL <p><a  href=\"https://www.dianiuxinnova.com\">https://www.dianiuxinnova.com</a></p>"
 
-            urlBinaries:"https://github.com/dianiux-innova/doubleemoji" //URL WITH release.zip
+            urlBinaries:"https://github.com/dianiux-innova/qtlgplapptemplateExamples"//"qrc:/release.zip"//"https://github.com/dianiux-innova/doubleemoji" //URL WITH release.zip
             onBack:stackView.pop() //back button
         }
     }
