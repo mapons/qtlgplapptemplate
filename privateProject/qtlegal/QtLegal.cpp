@@ -142,7 +142,7 @@ QString const QtLegal::saveReleaseLocaly(){
         });*/
       return tr("IMPOSSIBLE TO SAVE TO")+"\n"+path +"\n"+tr("CHECK") +"\n"+ "android.permission.WRITE_EXTERNAL_STORAGE";
 #endif
-      return tr("IMPOSSIBLE TO SAVE TO")+"\n"+path;
+      return tr("IMPOSSIBLE TO SAVE TO")+"\n"+path ;
     }
 
 }
