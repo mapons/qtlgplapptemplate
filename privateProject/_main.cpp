@@ -13,8 +13,7 @@
 
 #ifdef DEFINED_PUBLIC_LIBS
 //test external library
-#include <JlCompress.h>
-
+#include <quazip.h>
 #endif
 int _main(int argc, char *argv[]) //rename main to _main
 {
@@ -27,7 +26,7 @@ int _main(int argc, char *argv[]) //rename main to _main
     QGuiApplication app(argc, argv);
 
     //set software data for legal widget
-    //app.setApplicationName("My custom app name");
+    app.setApplicationName("qtLgplAppTemplate");
     app.setOrganizationName("My organization");
     app.setOrganizationDomain("myorganization.com");
 
@@ -51,7 +50,7 @@ int _main(int argc, char *argv[]) //rename main to _main
 
 
 #ifdef DEFINED_PUBLIC_LIBS
-    qWarning()<<"TEST EXTERNAL LIBRARY "<<JlCompress::compressFile("text.zip","main.o");
+    QuaZip tesObject;
 #endif
 
 
