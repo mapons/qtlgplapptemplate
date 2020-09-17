@@ -26,7 +26,9 @@ CONFIG += c++14
 #MANDATORY
 TEMPLATE = app
 SOURCES += main.cpp
+
 RESOURCES += main.qrc # project dependencies
+
 #OPTIONAL: ADD RELEASE.zip project library in resources
 contains(ADDZIPTORESOURCES, 'yes'):{
   contains(GENERATEZIP, 'yes'):{

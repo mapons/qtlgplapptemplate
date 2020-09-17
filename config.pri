@@ -17,3 +17,4 @@ CONFIG(debug, debug|release) {
 
 #add release.zip file into executable (executable doubles size!!!!)
 ADDZIPTORESOURCES=no
+#TEST STATIC BUILD ON WINDOWS
