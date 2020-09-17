@@ -60,8 +60,8 @@ contains(GENERATEZIP, 'yes'):{
  QMAKE_EXTRA_TARGETS += makedependencies  zip
 }else{
  message("SKIPING ZIP FILE")
- #PRE_TARGETDEPS +=      makedependencies
- #QMAKE_EXTRA_TARGETS += makedependencies
+ PRE_TARGETDEPS +=      makedependencies
+ QMAKE_EXTRA_TARGETS += makedependencies
 }
 
 DISTFILES += \
