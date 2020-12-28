@@ -51,6 +51,8 @@ bool scanQmlDir(const std::string &directory,const std::string &outputFile )
                 while ( getline (file,line) )
                 {
                     if (std::regex_search(line, match, re)){
+                        line.erase(std::remove(line.begin(), line.end(), '\r'), line.end()); //eliminar saltos de linea
+                        line.erase(std::remove(line.begin(), line.end(), '\n'), line.end()); //eliminar saltos de linea
                         importList.push_back(line);
                     }
                 }
@@ -59,13 +61,16 @@ bool scanQmlDir(const std::string &directory,const std::string &outputFile )
     }
 
     std::sort(importList.begin(), importList.end());
-    importList.erase( unique( importList.begin(), importList.end() ), importList.end() );//remove duplicates
+
+    importList.erase( std::unique( importList.begin(), importList.end() ), importList.end() );//remove duplicates
+
 
     //generate import template
     std::ofstream file (outputFile);
     if (file.is_open())
     {
         for (auto &line:importList) {
+
             file<<line << '\n';
         }
         file << "Item{}\n";
@@ -74,6 +79,7 @@ bool scanQmlDir(const std::string &directory,const std::string &outputFile )
     }
     return false;
 }
+
 void stringNormalize(std::string &str){
 
 #ifdef WIN32
