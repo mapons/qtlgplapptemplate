@@ -13,14 +13,7 @@ exists($$PWD/config.pri) {
 
 #TARGET = $$APPTARGET
 #END CUSTOM PARAMETERS
-win32{
-}else{
-unix{
-}else{
-#WEBASSEMBLY
-QMAKE_LFLAGS += '-s TOTAL_MEMORY=1500mb -s TOTAL_STACK=1200mb'
-}
-}
+
 
 CONFIG += c++14
 #MANDATORY
@@ -39,10 +32,12 @@ contains(ADDZIPTORESOURCES, 'yes'):{
   }
 }
 
-DISTFILES += builder.qrc # DIST FILES ONLY
+DISTFILES += builder.qrc \ # DIST FILES ONLY
+    Qt_LICENSE.LGPL3.txt \
+    README.txt
 
 #APP ICON
-RC_ICONS = icon.ico #ICONO
+RC_ICONS = icon.ico
 ICON = icon.ico
 
 
@@ -66,7 +61,9 @@ else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../privateProject/d
 
 unix{
         android{
-            LIBS += -L$$OUT_PWD/../privateProject/ -L$$PWD/  -lprivateProject_$${QT_ARCH} # fichero copiado en la carpeta de deploy
+            LIBS += -L$$OUT_PWD/../privateProject/ -L$$PWD/  -lprivateProject_$${QT_ARCH}
+            #DEFINES += LIBS_SUFFIX='\\"_$${QT_ARCH}.so\\"'
+            #QT += androidextras
         }else{
             LIBPRIVATE=$$OUT_PWD/../privateProject/libprivateProject.a
             !exists($$OUT_PWD/../privateProject/libprivateProject.a ) {
@@ -85,10 +82,6 @@ exists($$PWD/../privateProject){
 }
 
 
-#android{
-    #DEFINES += LIBS_SUFFIX='\\"_$${QT_ARCH}.so\\"'
-    #QT += androidextras
-#}
 
 
 #Add sources for open other open source LGPL libraries

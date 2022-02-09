@@ -12,22 +12,14 @@ contains(ADDZIPTORESOURCES, 'yes'):{
  ZIPFILE= $$shell_path($$OUT_PWD"/../release.zip")
 }
 
-SCANNERCOMMAND="projectDeployLinux"
-win32{
-SCANNERCOMMAND=projectDeployWin
-}
-unix{
- macx {
-  SCANNERCOMMAND=projectDeployMacx
- }else{
-  ios{
-
-   SCANNERCOMMAND=projectDeployMacx
-  }
-  else {
-   SCANNERCOMMAND=projectDeployLinux
-  }
- }
+equals(QMAKE_HOST.os, Windows) {
+       SCANNERCOMMAND=projectDeployWin
+} else:contains(QMAKE_HOST.os, Linux) {
+       SCANNERCOMMAND=projectDeployLinux
+} else:equals(QMAKE_HOST.os, Darwin) {
+       SCANNERCOMMAND=projectDeployMacx
+} else {
+       error("Operating system not supported.")
 }
 
 
@@ -39,14 +31,14 @@ makedependencies.commands = '"$$shell_path($$PWD/$$SCANNERCOMMAND)"' -f "'"$$she
 
 zip.depends = makedependencies
 contains(ADDZIPTORESOURCES, 'yes'):{
-    win32{
+    equals(QMAKE_HOST.os, Windows):{
         zip.commands='"$$shell_path($$PWD/7za.exe)"' a -mx=9 -r $$shell_path($$PWD"/../main/release.zip") $$shell_path(../$$TARGET) # ojo, esto me lo mete en el directorio home
     }else{
         #zip.commands=zip -8 -r  '"$$shell_path($$PWD/../main/release.zip)"' '"$$shell_path(../$$TARGET)"' # ojo, esto me lo mete en el directorio home
         zip.commands=cd .. ;zip -9 -r  '"$$shell_path($$PWD/../main/release.zip)"' '"$$TARGET"' # ojo, esto me lo mete en el directorio home
     }
 }else{
-    win32{
+    equals(QMAKE_HOST.os, Windows):{
         zip.commands='"$$shell_path($$PWD/7za.exe)"' a -mx=9 -r  $$shell_path($$OUT_PWD"/../release.zip") $$shell_path(../$$TARGET)
     }else{
         #zip.commands=zip -7 -r  '"$$shell_path($$OUT_PWD/../release.zip)"' '"$$shell_path(../$$TARGET)"'
