@@ -276,40 +276,34 @@ int main(int argc, char *argv[])
 
         //COPY PRIVATE LIBRARY
         {
-#ifdef WIN32
-            std::string libprivateOri= destinationFolder +"\\privateProject\\" + (release?"release\\":"debug\\")   +  "privateProject.lib";
+            std::error_code ec;
+            std::string libprivateOri=destinationFolder +"/privateProject/libprivateProject.a";
             stringNormalize(libprivateOri);
-            std::string libprivateDest=deployFolder+"/main/privateProject.lib";
+            std::string libprivateDest=deployFolder+"/main/libprivateProject.a";
             stringNormalize(libprivateDest);
+#ifdef WIN32
+            std::string libprivateOri1= destinationFolder +"\\privateProject\\" + (release?"release\\":"debug\\")   +  "privateProject.lib";
+            stringNormalize(libprivateOri1);
+            std::string libprivateDest1=deployFolder+"/main/privateProject.lib";
+            stringNormalize(libprivateDest1);
 
             std::string libprivateOri2= destinationFolder +"/privateProject/" + (release?"release/":"debug/")   +  "libprivateProject.a";
             stringNormalize(libprivateOri2);
             std::string libprivateDest2=deployFolder+"/main/libprivateProject.a";
             stringNormalize(libprivateDest2);
 
-
-#else
-            std::string libprivateOri=destinationFolder +"/privateProject/libprivateProject.a";
-            stringNormalize(libprivateOri);
-            std::string libprivateDest=deployFolder+"/main/libprivateProject.a";
-            stringNormalize(libprivateDest);
+            if(fs::exists(libprivateOri1)) fs::copy(libprivateOri1,libprivateDest1,ec);
+            else (fs::exists(libprivateOri2)) fs::copy(libprivateOri2,libprivateDest2,ec);
+            else
 #endif
+            if(fs::exists(libprivateOri)) fs::copy(libprivateOri,libprivateDest,ec);
 
-            std::error_code ec;
-            fs::copy(libprivateOri,libprivateDest,ec);
-#ifdef WIN32
-            if(ec.value()){ //MAYBE MINGW .a files?
-                ec.clear();
-                fs::copy(libprivateOri2,libprivateDest2,ec);
-            }
-#endif
-            if(ec.value())
+
+            if(ec.value()) //ON ERROR, TRY TO COPY OTHER LIBRARIES
             {
-#ifdef WIN32
                 std::string libprivateOriFolder=destinationFolder +"/privateProject/release";
-#else
-                std::string libprivateOriFolder=destinationFolder +"/privateProject/";
-#endif
+                if(!fs::exists(libprivateOriFolder)) libprivateOriFolder=destinationFolder +"/privateProject/";
+
                 stringNormalize(libprivateOriFolder);
                 std::string libprivateDestFolder=deployFolder+"/main/";
                 stringNormalize(libprivateDestFolder);
@@ -320,7 +314,7 @@ int main(int argc, char *argv[])
                     outfile<<"ERROR COPY "<<libprivateOriFolder<<" --> "<<libprivateDestFolder <<" "<<ec.message()<<std::endl;
                     return EXIT_FAILURE;
                 }else {
-                    if(verbose ){
+                    if(verbose){
                         std::cout<<"COPIED "<<copied<<" "<<libprivateOriFolder<<" --> "<<libprivateDestFolder <<std::endl;
                         outfile<<"COPIED "<<copied<<" "<<libprivateOriFolder<<" --> "<<libprivateDestFolder<<std::endl;
                     }
@@ -372,8 +366,8 @@ int main(int argc, char *argv[])
 
             }
             if(verbose){
-                std::cout<<"COPY "<<ori<<" --> "<<std::endl;
-                outfile<<" COPY "<<ori<<" --> "<<std::endl;
+                std::cout<<"COPY "<<ori<<" --> "<<dest<<std::endl;
+                outfile<<" COPY "<<ori<<" --> "<<dest<<std::endl;
             }
         }
 
@@ -416,7 +410,7 @@ int main(int argc, char *argv[])
                 return EXIT_FAILURE;
             }
             if(verbose){
-                std::cout<<"COPY "<<ori<<" --> "<<dest <<std::endl;
+                std::cout<<"RCOPY "<<ori<<" --> "<<dest <<std::endl;
                 outfile<<" COPY "<<ori<<" --> "<<dest <<std::endl;
             }
         }
