@@ -26,7 +26,9 @@
 #include <QDebug>
 #include <QGuiApplication>
 #if defined(Q_OS_ANDROID)
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <QtAndroid>
+#endif
 #endif
 static QtLegal * pinstance  =nullptr;
 static QMutex m_mutex;
@@ -132,12 +134,12 @@ QString const QtLegal::saveReleaseLocaly(){
       return  tr("FILE SAVED") +path;
     }else{
 #if defined(Q_OS_ANDROID)
-      //AHORA NO SE USA
+      //EXAMPLE TO SAVE EMBEDDED RELEASE.ZIP INTO ANDROID DEVICE
     /*  QtAndroid::requestPermissions({"android.permission.WRITE_EXTERNAL_STORAGE"},
                                     [this](const QtAndroid::PermissionResultMap & map) {
           if(map.find("android.permission.WRITE_EXTERNAL_STORAGE")!=map.end()){
               qDebug()<<"SE HA CONCEDIDO EL PERMISO  DE ESCRITURA";
-              //   saveReleaseLocaly(); //reintentar
+              //   saveReleaseLocaly(); //retry
             }
         });*/
       return tr("IMPOSSIBLE TO SAVE TO")+"\n"+path +"\n"+tr("CHECK") +"\n"+ "android.permission.WRITE_EXTERNAL_STORAGE";
