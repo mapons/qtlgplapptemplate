@@ -299,10 +299,12 @@ int main(int argc, char *argv[])
             std::string libprivateDest2=deployFolder+"/main/libprivateProject.a";
             stringNormalize(libprivateDest2);
 
-            if(fs::exists(libprivateOri1)){ fs::copy(libprivateOri1,libprivateDest1,ec);
+            if(fs::exists(libprivateOri1)){
+                fs::copy(libprivateOri1,libprivateDest1,ec);
                 tryCopyLib=true;
             }
-            else if(fs::exists(libprivateOri2)){ fs::copy(libprivateOri2,libprivateDest2,ec);
+            else if(fs::exists(libprivateOri2)){
+                fs::copy(libprivateOri2,libprivateDest2,ec);
                 tryCopyLib=true;
             }
             else
