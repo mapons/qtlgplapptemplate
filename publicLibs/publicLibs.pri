@@ -12,11 +12,8 @@ ORI_RESOURCES= $$RESOURCES
 
 
 
-#example external library
-include($$PWD/zlib-1.2.11/zlib.pri)
-DEFINES += QUAZIP_STATIC
-include($$PWD/quazip-master/quazip.pri)
-
+#example external LGPL library
+include($$PWD/mainLoopWDT/mainLoopWDT.pri)
 
 
 

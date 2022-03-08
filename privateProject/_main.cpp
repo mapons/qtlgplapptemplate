@@ -13,7 +13,7 @@
 
 #ifdef DEFINED_PUBLIC_LIBS
 //test external library
-#include <quazip.h>
+#include "mainLoopWdt.h"
 #endif
 int _main(int argc, char *argv[]) //rename main to _main
 {
@@ -21,7 +21,11 @@ int _main(int argc, char *argv[]) //rename main to _main
     //If the file name contains characters that cannot be part of a valid C++ function name (such as '-'), they have to be replaced by the underscore character ('_').
 
     Q_INIT_RESOURCE(privateProject);//FORCE LINK RESOURCES IN STATIC LIBRARY ..."privateProject.qrc"
+
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+#endif
 
     QGuiApplication app(argc, argv);
 
@@ -50,7 +54,9 @@ int _main(int argc, char *argv[]) //rename main to _main
 
 
 #ifdef DEFINED_PUBLIC_LIBS
-    QuaZip tesObject;
+    mainLoopWdt wdt(true,2000, 5000,0,&app); //Declare WWDT Instance
+    engine.rootContext()->setContextProperty("WDT", &wdt);
+    wdt.startWdt();//start WDT
 #endif
 
 
