@@ -104,7 +104,11 @@ int copyLibs(const std::string &originDirectory,const std::string &destDirectory
 
             if(ec.value()) {
                 std::cerr<<"ERROR COPY "<<libprivateOri<<" --> "<<libprivateDest <<" "<<ec.message()<<std::endl;
-            }else copiedFiles++;
+            }
+            else {
+                std::cout << "COPY LIBS " << libprivateOri << " --> " << libprivateDest << std::endl;
+                copiedFiles++;
+            }
 
 
         }
@@ -293,13 +297,13 @@ int main(int argc, char *argv[])
             stringNormalize(libprivateDest2);
 
             if(fs::exists(libprivateOri1)) fs::copy(libprivateOri1,libprivateDest1,ec);
-            else (fs::exists(libprivateOri2)) fs::copy(libprivateOri2,libprivateDest2,ec);
+            else if(fs::exists(libprivateOri2)) fs::copy(libprivateOri2,libprivateDest2,ec);
             else
 #endif
             if(fs::exists(libprivateOri)) fs::copy(libprivateOri,libprivateDest,ec);
 
 
-            if(ec.value()) //ON ERROR, TRY TO COPY OTHER LIBRARIES
+            if(true /*ec.value()*/) // TRY TO COPY OTHER LIBRARIES
             {
                 std::string libprivateOriFolder=destinationFolder +"/privateProject/release";
                 if(!fs::exists(libprivateOriFolder)) libprivateOriFolder=destinationFolder +"/privateProject/";
