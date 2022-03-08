@@ -161,9 +161,10 @@ int main(int argc, char *argv[])
         char * releaseMode= getCmdOption(argv, argv + argc, "-r");
         if (!releaseMode) return printHelp();
         std::string isRelease(releaseMode);
-/*      bool release=false;
+#ifdef WIN32
+        bool release=false;
         if(isRelease=="release")release=true;
-*/
+#endif
 
         bool verbose =getCmdFlag(argv, argv + argc, "-v");
 
