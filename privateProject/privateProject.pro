@@ -14,10 +14,10 @@ android{
 
 HEADERS += main.h
 DEFINES += BUILDMAINLIB  # macro _main()
-#include($$PWD/yourDotProProjectFile.pri) # YOUR ORIGINAL PRO FILE; RENAMED TO .PRI AND EDITED
+
 include($$PWD/privateProjectQtModules.pri) # ALL QT+= FOR YOUR PROJECT
 
-#OPTIONAL PUBLIC EXTERNAL LIBRARIES INCLUIDES ONLY
+#OPTIONAL PUBLIC EXTERNAL LIBRARIES INCLUDES ONLY
 exists($$PWD/../publicLibs/publicLibs.pri){
     include($$PWD/../publicLibs/publicLibs.pri)
     DEFINES+= DEFINED_PUBLIC_LIBS
