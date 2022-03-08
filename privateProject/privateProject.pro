@@ -7,7 +7,9 @@ android{
 #TARGET = privateProject
     TARGET = privateProject_$${QT_ARCH}
     #DEFINES += LIBS_SUFFIX='\\"_$${QT_ARCH}.so\\"'
-    QT += androidextras
+    equals(QT_VERSION, 5){
+       QT += androidextras
+    }
 }else{
     TARGET = privateProject
 }
